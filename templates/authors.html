@@ -1,0 +1,24 @@
+{% extends "new_layout.html" %}
+
+{% block entire_title %} {{ locals.authors }} | {{ locals.magazine_name }}{% endblock %}
+
+{% block page_header %}
+
+    <h2>{{ locals.authors }}</h2>
+
+{% endblock %}
+
+{% block page_content %}
+ 
+       <ul class="articles">
+            {% for author in authors %}
+                 <li>
+                   	<h3 style="font-weight: normal;"><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></h3>
+				</li>
+            {% endfor %}
+        </ul>
+		<br />
+		{% include "pagination.html" %}
+        
+{% endblock %}
+		

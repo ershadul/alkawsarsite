@@ -1,0 +1,58 @@
+{% extends "new_layout.html" %}
+
+{% block entire_title %} {{ section.title }} | {{ locals.magazine_name }}{% endblock %}
+
+{% load custom_tags %}
+
+{% block page_header %}
+<div>
+    <h2 class="section-title left">{{ section.title }}</h2>
+    <div class="right" style="color: #767676; margin-top: 10px;">
+        {% ifequal language 'english' %}
+            <span>Showing {{ page.start_index }}-{{ page.end_index }} of {{ page.paginator.count }} </span>
+        {% else %}
+            <span>{{ page.start_index|bengalinumber }}-{{ page.end_index|bengalinumber }}&nbsp;টি&nbsp;{{ page.paginator.count|bengalinumber }}&nbsp;টি হতে</span>
+        {% endifequal %}
+    </div>
+    <div class="clear"></div>
+</div>
+{% endblock %}
+
+
+{% block page_content %}
+		 <ul id="questions-answers">
+    		{% for advice in advices %}
+    			<li>
+    			    <div>
+                          <span class="questioner">{{ advice.questioner }}</span>
+                          <span class="address">. {{ advice.address }}</span>
+                    </div> 
+                    <div class="question">
+                        <span style="color: red;font-size: 1.2em;padding: 0 10px 0 0;">{{ locals.problem }}:</span>
+                        {{ advice.question|safe }}
+                    </div>
+                    <div class="answer">
+                    <span style="color: #008000;font-size: 1.2em;padding: 0 10px 0 0;">{{ locals.advice }}:</span>
+                        {{ advice.answer|safe }}
+                    </div>
+                    <div class="references">{{ advice.references }}</div>
+    			</li>
+    		{% endfor %}
+   		 </ul>
+		<br />
+		{% include "pagination.html" %}
+		
+{% endblock %}
+
+{% block page_context %}
+	<div id="all-sections">
+        <h2>{{ locals.all_sections }}</h2>
+		<ul class="bullet">
+		     {% for section in sections %}
+			 	<li class="{{ language }}">
+			 	       <a href="{{ section.get_absolute_url }}">{{ section.title }}</a>
+                </li>
+             {% endfor %}
+		</ul>
+    </div>
+{% endblock %}

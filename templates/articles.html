@@ -1,0 +1,13 @@
+<ul class="articles">
+    {% for article in articles %}
+    <li>
+        <h3><a href="/article/{{ article.id }}">{{ article.headline }}</a></h3>
+        
+        {{ article.get_authors_link|safe }}
+    
+        <p class="body-text">{{ article.body_text|truncatewords:50 }}</p>
+		<p><a id="read-more" class="right" href="/article/{{ article.id }}">{{ locals.read_more }} »</a></p>
+		<div class="clear"></div>
+    </li>
+    {% endfor %}
+</ul>

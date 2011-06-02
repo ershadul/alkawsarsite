@@ -1,0 +1,10 @@
+<li>
+   <div>
+       <span class="serial">{{ fatawa.serial }}</span>
+       <span class="questioner">. {{ fatawa.questioner }}</span>
+   	   <span class="address">. {{ fatawa.address }}</span>
+   </div> 
+   <div class="question"><span style="color: red;font-size: 1.2em;padding: 0 10px 0 0;">{{ locals.question }}:</span>{{ fatawa.question|safe }}</div>
+   <div class="answer"><span style="color: #008000;font-size: 1.2em;padding: 0 10px 0 0;">{{ locals.answer }}:</span>{{ fatawa.answer|safe }}</div>
+   <div class="references">{{ fatawa.references|safe }}</div>
+</li>

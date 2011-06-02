@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %} Server Error {% endblock %}
+
+{% block body %}
+<div class="form">
+    <h2>Innalillah! Something wrong happened! </h2>
+    <a href="/">Please go back to home</a>
+	<div style="display: none">
+		{{ error_data.description|safe }}
+	</div>
+</div>
+{% endblock %}
+
+{% block ganalytics %}{% endblock %}

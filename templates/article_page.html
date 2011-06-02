@@ -1,0 +1,107 @@
+{% extends "new_layout.html" %}
+
+{% block entire_title %}  {{ article.headline }} | {{ locals.magazine_name }}{% endblock %}
+
+{% block page_content %}
+        <div id="site-map" style="padding: 0 0 5px 0">
+            <a href="{{ issue.get_absolute_url }}">প্রথম পাতা</a><span style="padding: 0 10px;">»</span>
+            {% if article.section %}
+            <a href="{{ article.get_issue_section_url }}">{{ article.section.title }}</a><span style="padding: 0 10px;">»</span>
+            {% endif %}
+        </div>
+        <div class="page-content-header">
+            <h2 style="padding-bottom: 5px;">{{ article.headline }}</h2>
+            <div class="left">
+                {{ article.get_authors_link|safe }}
+            </div>
+            <div id="share-control" class="right" style=" padding: 0;">
+                <img class="left" src="/static/img/tools_print.gif" /><a id="print" class="left" href="{{ article.get_absolute_url }}/print">প্রিন্ট সংস্করণ</a>
+                <img class="left" src="/static/img/icon_share.gif" /><a id="share" class="left" href="#">শেয়ার</a>
+            </div>
+            <div class="clear"></div>
+            <div id="share-box" style="display: none;">
+                <div class="share-inner-box">
+                    <div class="share-top">
+                        <h4>সামাজিক ওয়েব সাইটে শেয়ার করুন</h4>
+                        <span><a href="#" class="close-share">বন্ধ করুন</a></span>
+                        <div class="clear"></div>
+                    </div>
+                    <ul id="share-menu">
+                        <li><a class="digg" href="http://digg.com/submit?phase=2&url=http://alkawsar.com{{ article.get_absolute_url }}&title={{ article.headline }}">Digg</a></li>
+                        <li><a class="google" href="http://www.google.com/bookmarks/mark?op=edit&bkmk=http://alkawsar.com{{ article.get_absolute_url }}&title={{ article.headline }}">Google Bookmarks</a></li>
+                        <li><a class="delicious" href="http://del.icio.us/post?url=http://alkawsar.com{{ article.get_absolute_url }}&title={{ article.headline }}">del.icio.us</a></li>
+                        <li><a class="twitter" href="http://twitter.com/home?status={{ article.headline }} http://alkawsar.com{{ article.get_absolute_url }}">Twitter</a></li>
+                        <li><a class="reddit" href="http://reddit.com/submit?url=http://alkawsar.com{{ article.get_absolute_url }}&title={{ article.headline }}">reddit</a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+		<div id="body-text">{{ article.body_text|safe }}</div>
+        <div id="article-pages" style="display: none; margin: 5px 0; padding: 5px 10px; text-align: right; border-bottom: 1px solid #ccc">
+            <p style="display: inline; padding: 3px;color: #008000;font-weight: 1.0em">পৃষ্ঠাসমূহ</p>
+        </div>
+		
+{% endblock %}
+
+{% block page_context %}
+    {% comment %}
+    {% if other_section_articles %}
+    <h2>এ বিভাগের অন্যান্য আর্টিকেল</h2>
+		<ul class="articles">
+    			{% for article in other_section_articles %}
+    				<li>
+    				    <p><a style="color: #999;margin-bottom: 10px;" href="{{ article.issue.get_absolute_url }}">{{ article.issue.title }}</a></p>
+       				 	<a href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
+        			</li>
+    			{% endfor %}
+		</ul>
+    <br />
+    {% endif %}
+    {% endcomment %}
+    
+    {% if other_issue_articles %}
+    <h2>{{ locals.other_articles_from_this_issue }}</h2>
+	<ul class="articles">
+    	{% for article in other_issue_articles %}
+         	<li>
+    		    <p><a style="color: #999;margin-bottom: 10px;" href="{{ article.section.get_absolute_url }}">{{ article.section.title }}</a></p>
+       		 	<a href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
+        	</li>
+    	{% endfor %}
+	</ul>
+   {% endif %}
+{% endblock %}
+
+{% block js_includes %}
+    <script type="text/javascript">
+        var page_count = $('div#body-text div.page').length;
+        if (page_count > 1) {
+                $('div#article-pages').show();
+                var i = 1;
+                for(i=1; i <= page_count; i++) {
+                    $('div#article-pages').append('<span><a href="#">' + i + '</a></span>');
+                }
+                $('div#article-pages span:first').addClass('active');
+                $('div#article-pages span a').click( function (e) {
+                    var text = $(e.target).text();
+                    if ($(e.target).parent().hasClass('active') == true) return true;
+                    var active = parseInt($('div#article-pages span.active a').text());
+					$('div#article-pages span').removeClass('active');
+                    $(e.target).parent().addClass('active');
+                    number = parseInt(text);
+                    $('div#page' + active).fadeOut(500, function () {
+                        $('div#page' + number).fadeIn(500);
+                    });
+                });
+        }
+        $('a#share').click(function (e) {
+            e.preventDefault();
+            $('div#share-box').show();
+            $('div#share-box a.close-share').click(function (e) {
+               e.preventDefault();
+               $('div#share-box').hide(); 
+            });
+        });
+    </script>
+{% endblock %}

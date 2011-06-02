@@ -1,0 +1,14 @@
+{% if related_articles %}
+	{% ifequal language "bengali" %}
+		<h2>সম্পর্কযুক্ত নিবন্ধসমূহ</h2>
+	{% else %}
+		<h2>Related Articles</h2>
+	{% endifequal %}
+    
+    <div class="border"></div>
+    <ul id="related-articles">
+        {% for article in related_articles %}
+            <li><a href="/article/{{ article.id }}">{{ article.headline }}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}

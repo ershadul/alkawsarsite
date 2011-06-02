@@ -1,0 +1,86 @@
+{% extends "new_layout.html" %}
+
+{% block title %} {% ifequal language "bengali" %} গ্রাহক ও এজেন্ট হওয়ার নিয়ামাবলী {% else %} Rules for subscribers and agents {% endifequal %} {% endblock %}
+
+{% block page_header %}
+     <h2>{% ifequal language "bengali" %} গ্রাহক ও এজেন্ট হওয়ার নিয়ামাবলী {% else %} Rules for subscribers and agents {% endifequal %}</h2>
+{% endblock %}
+
+{% block page_content %}
+
+    <ul>
+        <li class="left" style="width: 45%; padding: 10px 20px 10px 10px;border-right:1px solid #ddd;">
+           {% ifequal language "bengali" %}
+                 <h3>এজেন্সি বিষয়ক জ্ঞাতব্য</h3>
+                 <ul id="agency-info">
+                    <li>» সর্বনিম্ন পাচঁ কপির এজেন্সি দেওয়া হয়</li>
+                    <li>» প্রতি বিশ কপিতে একটি সৌজন্য কপি, ৫০ কপিতে ৩টি, ১০০ কপিতে ৭টি সৌজন্য দেওয়া হয়</li>
+                    <li>» অর্ডার পেলে পত্রিকা ভিপিতে পাঠানো হয়</li>
+                    <li>» অবিক্রিত কপি ফেরত নেওয়া হয় না</li>
+                    <li>» এজেন্সি জন্য অগ্রীম বা জামানত পাঠাতে হয় না</li>
+                    <li>» মাসের যে কোনো দিনে পত্রিকার সংখ্যা বৃদ্ধি করা যায়</li>
+                    <li>» ৩০% কমিশন দেওয়া হয়</li>
+                 </ul>
+            {% else %}
+                 <h3></h3>
+            {% endifequal %}
+        </li>
+        <li class="right" style="width: 45%;padding: 10px 20px 10px 10px;">
+            {% ifequal language "bengali" %}
+             <h3>বার্ষিক গ্রাহক চাঁদার হার</h3>
+            <table id="subscription-info" cellpadding="0" cellspacing="0">
+                <tr class="header">
+                    <td>দেশ</td>
+                    <td>সাধা. ডাক (টাকা)</td>
+                    <td>রেজি. ডাক (টাকা)</td>
+                </tr>
+                <tr>
+                    <td>বাংলাদেশ</td>
+                    <td>১৮০</td>
+                    <td>২৪০</td>
+                </tr>
+                <tr>
+                    <td>সার্কভুক্ত দেশসমূহ</td>
+                    <td>৬৩৬</td>
+                    <td>৬৯৬</td>
+                </tr>
+                <tr>
+                    <td>মধ্যপাচ্য ও আফগানিস্তান</td>
+                    <td>৯৮০</td>
+                    <td>১০৪০</td>
+                </tr>
+                <tr>
+                    <td>মালেশিয়া, সিংগাপুর, ইন্দোনেশিয়া</td>
+                    <td>১০৪৪</td>
+                    <td>১১০৪</td>
+                </tr>
+                 <tr>
+                    <td>ইউরোপ, অস্ট্রেলিয়া</td>
+                    <td>১৩৬৫</td>
+                    <td>১৪২৫</td>
+                </tr>
+                 <tr>
+                    <td>আমেরিকা</td>
+                    <td>১৫৬০</td>
+                    <td>১৬২০</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        বি.দ্রঃ গ্রাহক হতে হলে সরাসরি মনি অর্ডার করতে হবে অথবা অফিসে নগদ টাকা প্রদান করতে হবে। কমপক্ষে ৬ মাসের গ্রাহক চাঁদা পাঠাতে হবে। অনেক সময় সাধারণ ডাকে গ্রাহকদের কাছে সময়মত পত্রিকা পৌছায় না। তাই আমরা রেজি. ডাকে গ্রাহক হওয়ার জন্য উৎসাহিত করে থাকি।
+                    </td>
+                </tr>
+            </table>
+            {% else %}
+                <h3></h3>
+            {% endifequal %}
+        </li>
+    </ul>
+    <div class="clear"></div>
+
+{% endblock %}
+
+{%  comment  %}
+{% block page_context %}
+	
+{% endblock %}
+{% endcomment %}

@@ -1,0 +1,14 @@
+<div>
+       <span class="serial">{{ advice.serial }}</span>
+       <span class="questioner">. {{ advice.questioner }}</span>
+       <span class="address">. {{ advice.address }}</span>
+</div> 
+<div class="question">
+    <span style="color: red;font-size: 1.2em;padding: 0 10px 0 0;">{{ locals.problem }}:</span>
+    {{ advice.question|safe }}
+</div>
+<div class="answer">
+    <span style="color: #008000;font-size: 1.2em;padding: 0 10px 0 0;">{{ locals.advice }}:</span>
+    {{ advice.answer|safe }}
+</div>
+<div class="references">{{ advice.references }}</div>

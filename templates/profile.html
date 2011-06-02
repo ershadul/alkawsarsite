@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	{% block css %}
+  		<link rel="stylesheet" type="text/css" href="/static/css/site.css" />
+	{% endblock %}
+    <title>{% block title %} Profile | Al-kawsar.com {% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+  	{% block body %}
+	<div class="form" style="width: 600px">
+		<p><a href="/">The Monthly Alkawsar</a></p>
+		<h2>{{ user.username|capfirst }}'s Profile</h2>
+		<ul>
+			<li><a href="/member/profile/change-password">Change Password</a></li>
+		</ul>
+		
+    </div>
+	{% endblock %}
+	
+  </body>
+</html>

@@ -1,0 +1,7 @@
+      <h3><a href="{{ article.get_absolute_url }}">{{ article.headline }}</a></h3>
+       {{ article.get_authors_link|safe }}
+       <div class="intro-text">{{ article.intro_text|truncatewords:50 }}</div>
+       <div>
+           <a class="read-more right" href="{{ article.get_absolute_url }}">{{ locals.read_more }} »</a>
+           <div class="clear"></div>
+       </div>

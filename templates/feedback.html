@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block entire_title %} মতামত | {{  locals.magazine }}{% endblock %}
+
+{% block body %}
+	<div class="form">
+		<p>Feedback to <a href="/">Alkawsar.com</a></p>
+		<div class="login-form">
+			{% if errors %}
+				<div class="errors">
+					<ul class="error-list">
+						{% for error in  errors.values %}
+							<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+			{% if successful %}
+				<p>{{ message }}</p>
+			{% else %}
+			<form name="sign-in" method="POST">
+				<ul>
+					{% if not user.id %}
+					<li>
+						<div class="form-label">
+							<label for="name">Name</label>
+						</div>
+						<div class="form-input">
+							<input type="text" id="name" class="text" name="name" value="{{ data.name }}" />
+						</div>
+						
+					</li>
+					<li>
+						<div class="form-label">
+							<label for="email">Email</label>
+						</div>
+						<div class="form-input">
+							<input type="text" id="email" class="text" name="email" value="{{ data.email }}" />
+						</div>
+					</li>
+					{% endif %}
+					<li>
+						<div class="form-label">
+							<label for="feedback">Feedback</label>
+						</div>
+						<div class="form-input">
+							<textarea type="text" id="feedback" rows="10" class="text" name="feedback" value="{{ data.feedback }}"></textarea>
+						</div>
+					</li>
+					<li>
+						<div class="form-label"></div>
+						<div class="form-input">
+							<input class="submit" type="submit" value="Send Feedback" />
+						</div>
+					</li>
+				</ul>
+			</form>
+		   {% endif %}
+		</div>
+	</div>
+{% endblock %}

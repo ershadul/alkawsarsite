@@ -1,0 +1,20 @@
+<div class="issue-header">
+	<h2 id="issue-title">{% if issue.title_arabic %} {{ issue.title_arabic }} || {% endif %}{{ issue.title }}</h2>
+    <p class="issue-number {{ language }}">
+        {% ifequal language 'english' %} 
+			{% if issue.is_default %}
+				Current Issue |
+			{% else %}
+				Archive |
+			{% endif %}
+			Year: {{ issue.get_issue_year }}, Issue: {{ issue.get_issue_number }}
+		{% else %}
+			{% if issue.is_default %}
+				চলতি সংখ্যা |
+			{% else %}
+				পুরোনো সংখ্যা |
+			{% endif %}
+			বর্ষঃ {{ issue.get_issue_year }}, সংখ্যাঃ {{ issue.get_issue_number }}
+		{% endifequal %}	
+   </p>
+</div>

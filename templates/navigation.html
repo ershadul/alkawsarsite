@@ -1,0 +1,17 @@
+{% ifequal language 'english' %}
+	<ul class="main-nav">
+		<li class="first-item"><a href="/">CURRENT ISSUE</a></li>
+		<li><a href="/authors">AUTHORS</a></li>
+		<li><a href="/aboutus">ABOUT US</a></li>
+		<li><a href="/contact">CONTACT US</a></li>
+		<li><a href="/feedback">FEEDBACK</a></li>
+	</ul>
+{% else %}
+	<ul class="main-nav">
+		<li class="first-item"><a href="/">চলতি সংখ্যা</a></li>
+		<li><a href="/authors">লেখকবৃন্দ</a></li>
+		<li><a href="/aboutus">আমাদের কথা</a></li>
+		<li><a href="/contact">যোগাযোগ</a></li>
+		<li><a href="/feedback">মতামত</a></li>
+	</ul>
+{% endifequal %}

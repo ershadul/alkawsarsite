@@ -1,0 +1,34 @@
+{% extends "new_layout.html" %}
+
+{% block title %} {{ section.title }} {% endblock %}
+
+{% block page_header %}
+    <h2 class="section-title">{{ section.title }}</h2>
+{% endblock %}
+
+{% block page_content %}
+		<ul class="articles">
+    		{% for article in articles %}
+    			<li>
+                    {% include "section_article_partial.html" %}
+    			</li>
+    		{% endfor %}
+   		 </ul>
+		<br />
+		{% include "pagination.html" %}
+		
+{% endblock %}
+
+{% block page_context %}
+	<div id="all-sections">
+        <h2>{{ locals.all_sections }}</h2>
+		<ul class="bullet">
+		     {% for section in sections %}
+			 	<li class="{{ language }}">
+			 	       <a href="{{ section.get_absolute_url }}">{{ section.title }}</a>
+                </li>
+             {% endfor %}
+		</ul>
+    </div>
+{% endblock %}
+		

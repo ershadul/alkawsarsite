@@ -1,0 +1,20 @@
+{% extends "new_layout.html" %}
+
+{% block entire_title %} {% ifequal language "bengali" %} পুরোনো সংখ্যা {% else %} Back Issues {% endifequal %} | {{ locals.magazine_name }}{% endblock %}
+
+{% block wrapper %}
+
+    <div style="padding: 20px 30px;">
+     <h2>{% ifequal language "bengali" %} পুরোনো সংখ্যা {% else %} Back Issues {% endifequal %}</h2>
+     <br />
+        {% for issue in back_issues %}
+            <div class="left" style="width: 140px; height: 230px; margin: 0 20px 15px 0;border: 1px solid #ccc; padding: 10px 15px;">
+                <img src="/static/img/cover-pages/{{ issue.image }}" style="width: 140px;height: 200px" />
+                <p style="text-align: center;padding-top: 3px;">
+                    <a href="{{ issue.get_absolute_url }}" style="font-size:16px;">{{ issue.title|upper }}</a>
+                </p>
+            </div>
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+{% endblock %}

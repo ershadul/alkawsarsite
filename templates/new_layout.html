@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block entire_title %} {{ locals.magazine_name }} - {{ locals.magazine_slogan }} {% endblock %}
+
+{% block body %}
+      <div id="main">
+          <div id="header">
+              <div id="bismillah">
+                  <img alt="Bismillahir Rahmanir Rahim" align="middle" src="/static/img/bismillatina.gif" />
+              </div>
+              <div id="top">
+                  <div id="logo" class="left">
+                  	{% ifequal language 'english' %}
+                      <span id="monthly">The Monthly</span>
+                      <h2 id="mag-name">ALKAWSAR</h2>
+                      
+                      <span id="slogan">Markazuddawa Al-Islamia Dhaka</span>
+					{% else %}
+						<span id="monthly">মাসিক</span>
+                      	{% comment %}<h2 id="mag-name">আলকাউসার</h2>{% endcomment %}
+                        <img src="/static/img/bengali-logo.png" />
+                        <span id="slogan">গবেষণামূলক উচ্চতর শিক্ষাপ্রতিষ্ঠান মারকাযুদ্ দাওয়াহ আলইসলামিয়া ঢাকা-এর মুখপত্র</span>
+                      	
+					{% endifequal %}
+                      
+                  </div>
+                  <div id="top-links" class="right">
+                  	 <div id="user-menu" class="right">
+						    <span class="salam {{ language }}">{{ locals.salam }}</span> <span class="sep">|</span>
+                            <a class="top-link {{ language }}" href="/ask_question">{{ locals.ask_question }}</a>
+                     </div>
+                     <div class="clear"></div>
+                     {% ifequal language 'english' %}
+                      <div id="languages" class="right">
+                          <a class="top-link {{ language }}" href="http://mysite.com:8000/">» বাংলা সংস্করণ</a><span class="sep">|</span>
+                          <span class="lang-selected">English</span>
+                          
+                      </div>
+					 {% else %}
+                      	<div class="clear"></div>
+                      	<div id="languages" class="right">
+                          <span class="lang-selected {{ language }}">বাংলা সংস্করণ</span>
+                          <a class="top-link" href="http://en.mysite.com:8000/">&raquo; Read in English</a>
+                      	</div>
+					 {% endifequal %}
+                      <div class="clear"></div>
+                  </div>
+                  <div class="clear"></div>
+              </div>
+          </div>
+          <div id="menu-bar" class="{{ language }}">	 
+               <ul class="right">
+                  {% for menu in locals.main_menu %}
+                      {% if menu.is_active %}
+                      <li class="left">
+                          <a class="menu-link {{ language }}" href="{{ menu.link }}">{{ menu.name|upper }}</a>
+                          {% if not menu.is_last %}
+                          <span class="sep">|</span>
+                          {% endif %}
+                      </li>
+                      {% endif %}
+                  {% endfor %}
+               </ul>
+               <div class="clear"></div>         
+		  </div>
+          <div id="wrapper">
+          	{% block wrapper %}
+              <div id="page-container">
+              	<div class="padding">
+                 	<div id="issue-header">
+                 	    {% block page_header %}
+                 		
+						<div id="issue-info" style="text-align: center">
+                            <h1>
+                            {{ issue.title_alias }}
+                            <span style="color: #999;padding-bottom: 5px;padding: 0 5px;">.</span>
+                            {{ issue.title }}
+                            </h1>
+              				<p style="">
+              				    
+								{% if issue.is_default %} 
+									{{ locals.current_issue }}
+								{% else %}
+									{{ locals.back_issue }}
+								{% endif %}
+							    
+              				    . {{ locals.year }}: {{ issue.issue_year }}   .  {{ locals.number }}: {{ issue.issue_number }}
+                            </p>
+						</div>    
+                        {% endblock %}   			
+					</div>
+					<div id="page-content">
+						<div style="padding:10px 0;">
+						{% block page_content %}
+                            
+                             <div style="width: 100%;">
+                                 <div style="float: left; width: 50%;">
+                                     <div style="padding: 0 10px 0 0;border-right: 1px dotted #ddd">
+                                     
+                                     <h3 style="color: #666;padding: 0 0 5px  0;">নিয়মিত বিভাগসমূহ</h3>
+                                     
+                                     {% for section in sections %}
+                                        <div style="margin: 0 0 5px 0;padding-bottom: 5px; border-bottom: 1px dotted #ddd">
+                                            <h4>
+                                                <a style="color: #3c8a37;" href="/issue/{{ issue.year }}/{{ issue.month }}/section/{{ section.slug_title }}">{{ section.title }} »</a>
+                                            </h4>
+                                            <ul class="headlines">
+                                                {% for article in section.articles %}
+                                                    <li>
+                                                       <a style="font-size: 1.15em" href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
+                                                        {{ article.get_authors_link|safe }}
+                                                    </li>
+                                                    
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                 </div>
+                                 <div style="float: left; width: 50%;">
+                                     <div style="padding: 0 0 0 10px;">
+                                          <h3 style="color: #666;padding: 0 0 5px  0;">এ সংখ্যায় আরো আছে</h3>
+                                         
+                                            <ul class="headlines">
+								                {% for article in other_articles %}
+									                <li style="border-bottom: 1px dotted #ddd">
+                                                    {% if article.section %}
+                                                        <h4> <a style="color: #008000" href="/issue/{{ issue.year }}/{{ issue.month }}/section/{{ article.section.slug_title }}">{{ article.section.title }} »</a></h4>
+                                                    {% endif %}
+        							                <a style="font-size: 1.15em;" href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
+        							                    {{ article.get_authors_link|safe }}
+									                </li>
+								                {% endfor %}
+							                </ul>
+                                    </div>
+                                 </div>
+                             </div>
+                             <div class="clear"></div>
+                             
+                             <div style="margin: 20px 0; padding: 10px; border-top: 2px solid #ccc">
+                             	<h2>{{ locals.back_issue }}</h2>
+                             	<br />
+                             	{% for issue in back_issues|slice:":3" %}
+            						<div class="left" style="width: 140px; height: 230px; margin: 0 20px 15px 0;border: 1px solid #ccc; padding: 10px 15px;">
+                						<img src="/static/img/cover-pages/{{ issue.image }}" style="width: 140px;height: 200px" />
+                						<p style="text-align: center;padding-top: 3px;">
+                    						<a href="{{ issue.get_absolute_url }}" style="font-size:16px;">{{ issue.title|upper }}</a>
+                						</p>
+            						</div>
+        						{% endfor %}
+        						<div class="clear"></div>
+        						<a style="font-weight: bold;" href="/issues/archives">আরও দেখুন »</a>
+                             </div>
+						{% endblock %}
+						
+						</div>
+					</div>
+					
+				</div>
+              </div>
+              <div id="page-context">
+                  <div class="padding">
+                      <div id="rss-link">
+                           <a class="left" href="http://feeds.feedburner.com/alkawsar" title="Read the latest articles">RSS 2.0</a>
+                           <img class="left" alt="RSS" src="/static/img/icon-rss.gif" />
+                           <div class="clear"></div>
+                      </div>
+
+                      {% ifequal language "bengali" %}
+                         <div id="bangla-help">
+                            <a href="/help/font" title="Read bangla better by installing font.">
+                                <img src="/static/img/bangla-help.png" />
+                            </a>
+                         </div>
+                      {% endifequal %}
+
+                      {% if issue and issue.image %}
+                          <div id="issue-cover" style="margin-bottom: 10px;">
+                              <h2>এ সংখ্যার প্রচ্ছদ</h2>
+                              <img id="cover-img" src="/static/img/cover-pages/{{ issue.image }}" /> 
+                           </div>
+                      {% endif %}
+                      {% block page_context %}
+                        {% if popular_articles %}
+                            <h2>{{ locals.popular_articles }}</h2>
+	                        <ul class="articles">
+    	                        {% for article in popular_articles %}
+         	                        <li><a href="{{ article.get_absolute_url }}">{{ article.headline }}</a></li>
+    	                        {% endfor %}
+	                        </ul>
+                        {% endif %}
+                        
+                        {% comment %}
+                     	<div id="back-issues">
+                     		<h2>{{ locals.back_issue }}</h2>
+							<ul class="headlines">
+                     			{% for issue in back_issues %}
+                     			<li>
+                     				<a href="/issue/{{ issue.year }}/{{ issue.month }}/{{ issue.slug_title }}">{{ issue.title }}</a>
+                     			</li>
+								{% endfor %}
+                     		</ul>
+                     	</div>
+                     	{% endcomment %}
+                        
+                        {% comment %}
+                        {% if tags %}
+                         <div id="tags-cloud">
+                          <h2>{{ locals.tags_cloud }}</h2>
+						  {% for tag in tags %}
+						  	<a style="font-size: {{ tag.font_size }}pt;" href="/tag/{{ tag.slug_name }}">{{ tag.name }}</a>
+                          {% endfor %}
+                         </div>
+                        {% endif %}
+                        {% endcomment %}
+                      
+                      {% if weblinks %}
+					  <div id="web-links">
+							<h2>{{ locals.weblinks|upper }}</h2>
+							<ul class="headlines">
+							{% for link in weblinks %}
+								<li><span class="right-arrow">»</span><a target="_blank" href="{{ link.url }}">{{ link.title }}</a></li>
+							{% endfor %}
+							</ul>
+					  </div>
+                      {% endif %}
+					 
+                     {% endblock %}
+					  
+                  </div>
+              </div>
+              <div class="clear"></div>
+			 {% endblock %}
+          </div>
+          <div id="footer">
+              <div class="padding">
+                  {% ifequal language 'bengali' %}<p>কপিরাইট (c) ২০১০ মাসিক আলকাউসার । ডিজাইন এবং ডেভেলপ
+                  {% else %}
+                    Copyright (c) 2010 The Monthly ALKAWSAR | Powered by
+                  {% endifequal %}
+                  - <a target="_blank" href="http://www.djangoguys.com">DjangoGuys</a></p>
+              </div>
+          </div>
+       </div>
+{% endblock %}

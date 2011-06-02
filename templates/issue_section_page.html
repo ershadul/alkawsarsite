@@ -1,0 +1,36 @@
+{% extends "new_layout.html" %}
+
+{% block page_content %}
+        <div id="site-map" style="padding: 0 0 10px 0">
+            <a href="{{ issue.get_absolute_url }}">প্রথম পাতা</a><span style="padding: 0 10px;">»</span>
+        </div>
+        <div class="page-content-header">
+            <a class="right" style="font-size: 1.2em" href="{{ section.get_absolute_url}} ">এ বিভাগের সকল লেখা »</a>
+            <h2 class="section-title">{{ locals.section }}: {{ section.title }}</h2>
+            <div class="clear"></div>
+        </div
+		<ul class="articles">
+    		{% for article in articles %}
+    			<li>
+                    {% include "section_article_partial.html" %}
+    			</li>
+    		{% endfor %}
+   		 </ul>
+		<br />
+		{% include "pagination.html" %}
+		
+{% endblock %}
+
+{% block page_context %}
+	<div id="all-sections">
+        <h2>অন্যান্য বিভাগসমূহ</h2>
+		<ul class="articles">
+		     {% for section in other_sections %}
+			 	<li class="{{ language }}">
+			 	       <a href="/issue/{{ issue.year }}/{{ issue.month }}{{ section.get_absolute_url }}">{{ section.title }}</a>
+                </li>
+             {% endfor %}
+		</ul>
+    </div>
+{% endblock %}
+		

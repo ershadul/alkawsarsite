@@ -1,0 +1,17 @@
+{% block entire_title %} {{ locals.archives }} | {{ locals.magazine_name }} {% endblock %}
+{% ifequal language 'english' %}
+    <h1>ARCHIVES</h1>
+{% else %}
+    <h1>পুরোনো সংখ্যা</h1>
+{% endifequal %}
+<ul class="archived-issues {{ language }}">
+	{% if issues %}
+		{% for issue in issues %}
+        	<!--
+			li><a href="/archive/{{ issue.year }}/{{ issue.month }}">{{ issue.title }}</a></li>
+			-->
+			<li><a href="/?issue={{ issue.id }}">{{ issue.title }}</a></li>
+		{% endfor %}
+	{% endif %}
+</ul>
+

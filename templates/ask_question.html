@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block entire_title %} {{ locals.ask_question }} | {{ locals.magazine_name }}{% endblock %}
+
+{% block body %}
+	<div class="form" style="width: 600px; min-height: 200px;">
+		<p style="text-align: left;">
+		    {% ifequal language "bengali" %}
+		        <a href="/"><h1>মাসিক আলকাউসার</h1></a>
+		    {%  endifequal %}
+		 </p>
+		{% if data.successful_msg %}
+			<h2 style="padding: 10px 0;">{{ data.successful_msg }}</h2>
+		{% else %}
+		    <div style="text-align: left; padding: 20px 0 0 10px;">
+		    {% ifequal language "bengali" %}
+		        <h2>কিছু কথা:</h2>
+		        <ul>
+		            <li>১. মাসিক আলকাউসার আপনার প্রশ্নের উত্তর যত দ্রুত সম্ভব প্রদান করার চেষ্টা করবে - ইনশাআল্লাহ।</li>		            <li>২. যারা ইতিপূর্বে প্রশ্ন করেও উত্তর পাননি, অনুগ্রহকরে আলকাউসার এর পরবর্তী সংখ্যা গুলো নিয়মিত পড়তে থাকুন।</li>
+		        </ul>
+		        <p></p>
+		    {%  endifequal %}
+		    </div>
+		{% comment %}<p>{{ locals.type_in_question }}</p>    {%  endcomment %}
+		<div class="login-form">
+			{% if errors %}
+				<div class="errors">
+					<ul class="error-list">
+						{% for error in  errors.values %}
+							<li>{{ error }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+			<form name="question" method="POST">
+				<ul>
+				    <li>
+						<div class="form-label">
+							<label for="question">{{ locals.name }}: *</label>
+						</div>
+						<div class="form-input">
+							<input id="name" type="text" class="text" name="name" style="width: 400px" value="{{ data.name }}" />
+						</div>
+					</li>
+                    <li>
+						<div class="form-label">
+							<label for="question">{{ locals.enter_email }}: *</label>
+						</div>
+						<div class="form-input">
+							<input id="email" type="text" class="text" name="email" style="width: 400px" value="{{ data.email }}" />						</div>
+					</li>
+                    <li>
+						<div class="form-label">
+							<label for="question">{{ locals.url }}:</label>
+						</div>
+						<div class="form-input">
+							<input id="url"  type="text" class="text" name="url" style="width: 400px" value="{{ data.url }}" />
+						</div>
+					</li>
+					<li>
+						<div class="form-label">
+							<label for="question">{{ locals.question }}: *</label>
+						</div>
+						<div class="form-input">
+							<textarea id="question" class="text" name="question" style="width: 400px">{{ data.question }}</textarea>
+						</div>
+					</li>
+					<li>
+						<div class="form-label"></div>
+						<div class="form-input">
+							<input class="submit" type="submit" value="{{ locals.submit }}" />
+						</div>
+					</li>
+				</ul>
+			</form>
+		</div>
+		{% endif %}
+	</div>
+{% endblock %}

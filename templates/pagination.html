@@ -1,0 +1,33 @@
+{% if page and not page.one_page_only %}
+    <div id="pagination">
+        {% if page.has_previous %}
+            <span>
+                <a href="?page={{ page.previous_page_number }}">« {{ locals.previous}}</a>
+            </span>
+        {% endif %}
+        {% load custom_tags %}
+        {% for p in page.page_range %}
+            {% if not p %}
+                ...&nbsp;
+            {% else %}
+            {% ifequal p page.number %}
+            {% ifequal language 'english' %}
+                <span class="active">{{ p }}</span>
+            {% else %}
+                <span class="active">{{ p|bengalinumber }}</span>
+            {% endifequal %}
+            {% else %}
+                {% ifequal language 'english' %}
+                    <span><a href="?page={{ p }}">{{ p }}</a></span>
+                {% else %}
+                    <span><a href="?page={{ p }}">{{ p|bengalinumber }}</a></span>
+                {% endifequal %}
+            {% endifequal %}
+            {% endif %}
+        {% endfor %}
+        {% if page.has_next %}
+            <span><a href="?page={{ page.next_page_number }}">{{ locals.next }} »</a>
+            </span>
+        {% endif %}
+    </div>
+{% endif %}

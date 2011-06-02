@@ -1,0 +1,8 @@
+<p style="padding-bottom: 5px;">
+   <a style="color: #008000" href="{{ article.issue.get_absolute_url }}">{{ article.issue.title }}</a>
+   {% if article.section %}
+          &nbsp;.&nbsp;
+          <a style="color: #666" href="{{ article.section.get_absolute_url }}">{{ article.section.title }}</a>
+   {% endif %}
+</p>
+<h3><a href="{{ article.get_absolute_url }}">{{ article.headline }}</a></h3>

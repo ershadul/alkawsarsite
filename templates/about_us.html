@@ -1,0 +1,20 @@
+{% extends "new_layout.html" %}
+
+{% block entire_title %} {{ locals.aboutus }} | {{ locals.magazine_name }} {% endblock %}
+
+{% block page_header %}
+		<h2>{{ locals.aboutus }}</h2>
+{% endblock %}
+{% block page_content %}
+	{% ifequal language "english" %}
+
+		<div class="body-text" style="padding: 10px 0;">
+    	All the Praise for Allah Subhanuta’la, Who is the Creator and Sustainer of all. Darood and Salam upon our beloved Rasulullah SallallahuAlaiyhiwaSallam. May Allah Subhanuta'la bestow eternal Rahmah on the Sahabah Radiallahu Anhum, through whose sacrifice and hardship Islam has come to us.
+    	We all undoubtedly are into this world to be tested. The life we are into is indeed very short. Life hereafter is the destiny we are heading towards. The Satisfaction of Allah SubhanuTa’la is the sole aim of our life. The magazine Alkawser began its journey on Muharram 1426 Hijri, February 2005 with this view. And today, only by the Grace of Allah SubhanuTa’la it has got the opportunity to present some portion of it in the web. Along with the magazine this portal would Inshallah strive to serve this Ummah keeping the aforementioned aim in front. Doa (prayers) – is being sought to all around the world.
+    	</div>
+	{% else %}
+		<div class="body-text" style="padding: 10px 0;">
+			উচ্চতর শিক্ষা ও গবেষণা প্রতিষ্ঠান মারকাযুদ্দা্ওয়া আল-ইসলামিয়া এর মূখপত্র
+		</div>
+	{% endifequal %}
+{% endblock %}

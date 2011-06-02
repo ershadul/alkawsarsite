@@ -1,0 +1,77 @@
+{% extends "new_layout.html" %}
+
+{% block entire_title %} {{ locals.contactus }} | {{ locals.magazine_name }}{% endblock %}
+
+{% block page_header %}
+    <h2>{{ locals.contactus }}</h2>
+{% endblock %}
+
+{% block page_content %}
+	{% ifequal language "english" %}
+    	<div class="padding">
+        	<h3>Advisor</h3>
+        	<p><a href="/author/mawlana-abdul-hai-paharpuri">Hazrat Mawlana Abdul Hai Paharpuri</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>Care Taker</h3>
+        	<p><a href="/author/muhammad-abdul-malek">Mawlana Abdul Malek</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>Editor</h3>
+        	<p><a href="/author/mufti-abul-hasan-muhammad-abdullah">Mufti Abul Hasan Muhammad Abdullah</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>Executive Editor</h3>
+        	<p><a href="/author/mawlana-sharif-muhammad">Mawlana Sharif Muhammad</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>Co-editor</h3>
+        	<p><a href="/author/muhammad-zakariya-adbullah">Mawlana Muhammad Jakariya Abdullah</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>Mailing Address</h3>
+        	<p>The Monthly Alkawsar<br/>30/12, Pollabi<br />Mirpur-12, Dhaka-1216</p>
+    	</div>
+		<div class="padding">
+        	<h3>Hot lines</h3>
+        	<p>
+        		Tel: 8050418, 0377-20005196<br />
+				Fax: 8034508 <br/>
+				Mobile: 01710-838379
+			</p>
+    	</div>
+	{% else %}
+    	<div class="padding">
+        	<h3>উপদেষ্টা</h3>
+        	<p><a href="/author/mawlana-abdul-hai-paharpuri">হযরত মাওলানা আব্দুল হাই পাহাড়পুরী</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>তত্বাবধায়ক</h3>
+        	<p><a href="/author/muhammad-abdul-malek">মাওলানা আব্দুল মালেক</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>সম্পাদক</h3>
+        	<p><a href="/author/mufti-abul-hasan-muhammad-abdullah">মুফতি আবুল হাসান মুহাম্মাদ আব্দুল্লাহ</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>নির্বাহী সম্পাদক</h3>
+        	<p><a href="/author/mawlana-sharif-muhammad">মাওলানা শরীফ মুহাম্মাদ</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>সহ-সম্পাদক</h3>
+        	<p><a href="/author/muhammad-zakariya-adbullah">মাওলানা মুহাম্মাদ যাকারিয়া আব্দুল্লাহ</a></p>
+    	</div>
+		<div class="padding">
+        	<h3>সর্বপ্রকার যোগাযোগ</h3>
+        	<p>মাসিক আলকাউসার<br/>৩০/১২, পল্লবী<br />মিরপুর-১২, ঢাকা-১২১৬</p>
+    	</div>
+		<div class="padding">
+        	<h3>হট লাইনস</h3>
+        	<p>
+        		ফোন: ৮০৫০৪১৮, ০৩৭৭-২০০০৫১৯৬<br />
+				ফ্যাক্স: ৮০৩৪৫০৮<br/>
+				মোবাইল: ০১৭১০-৮৩৮৩৭৯
+			</p>
+    	</div>
+	{% endifequal %}
+{% endblock %}

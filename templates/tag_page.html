@@ -1,0 +1,35 @@
+{% extends "new_layout.html" %}
+
+{% block page_header %}
+    <h2>{{ locals.tag }}: {{ tag.name }}</h2>
+{% endblock %}
+
+{% block page_content %}
+		<ul class="articles">
+    		{% for article in articles %}
+    			<li>{% include "article_partial.html" %}</li>
+    		{% endfor %}
+   		 </ul>
+		<br />
+		{% include "pagination.html" %}
+		
+{% endblock %}
+
+{% block page_context %}
+	<div id="tags-cloud">
+	    {% load custom_tags %}
+        <h2>{{ locals.all_tags }}</h2>
+		<ul class="articles">
+		     {% for tag in tags %}
+			 	<li class="{{ language }}">
+			 	    {% ifequal language "bengali" %}
+			 	        <a href="/tag/{{ tag.slug_name }}">{{ tag.name }} ({{ tag.total_ref|bengalinumber }})</a>
+                    {% else %}
+                        <a href="/tag/{{ tag.slug_name }}">{{ tag.name }} ({{ tag.total_ref }})</a>
+                    {% endifequal %}
+                </li>
+             {% endfor %}
+		</ul>
+    </div>
+{% endblock %}
+		

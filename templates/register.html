@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  	{% block css %}
+  		<link rel="stylesheet" type="text/css" href="/static/css/site.css" />
+	{% endblock %}
+    <title>{% block title %}Join to Al-kawsar members forum{% endblock %}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  </head>
+  <body>
+  	{% block body %}
+	<div class="form">
+		<p>Join to <a href="/">Alkawsar.com</a></p>
+		<p style="font-size: 16px;">Already a member? please <a href="/member/signin">Sign In.</a></p>
+		<div class="login-form">
+			{% if errors %}
+				<div class="errors">
+					<ul class="error-list">
+						{% if errors.username %}
+							<li>{{ errors.username }}</li>
+						{% endif %}
+						{% if errors.password1 %}
+							<li>{{ errors.password1 }}</li>
+						{% endif %}
+						{% if errors.password2 %}
+							<li>{{ errors.password2 }}</li>
+						{% endif %}
+						{% if errors.email %}
+							<li>{{ errors.email }}</li>
+						{% endif %}
+					</ul>
+				</div>
+			{% endif %}
+			<form name="signup" method="POST">
+				<ul>
+					<li>
+						<div class="form-label">
+							<label for="login">Username</label>
+						</div>
+						<div class="form-input">
+							<input type="text" id="login" class="text {% if errors.username %} error {% endif %}" name="username" value="{{ data.username }}" />
+							<span class="form-hint">You'll use this username to sign into Alkawsar.com</span>
+						</div>
+						
+					</li>
+						<div class="form-label">
+							<label for="pass">Password</label>
+						</div>
+						<div class="form-input">
+							<input type="password" id="pass" class="text {% if errors.password1 %} error {% endif %}" name="password1" value="{{ data.password1 }}" />
+						</div>
+					<li>
+						<div class="form-label">
+							<label for="retype-pass">Retype Password</label>
+						</div>
+						<div class="form-input">
+							<input type="password" id="retype-pass" class="text {% if errors.password2 %} error {% endif %}" name="password2" value="{{ data.password2 }}" />
+						</div>
+					</li>
+						<div class="form-label">
+							<label for="email">Email Address</label>
+						</div>
+						<div class="form-input">
+							<input type="text" id="email" class="text {% if errors.email %} error {% endif %}" name="email" value="{{ data.email }}"/>
+						</div>
+					<li>
+						
+					</li>
+					<li>
+						<div class="form-label"></div>
+						<div class="form-input">
+							<input class="submit" type="submit" value="Join now!" />
+						</div>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</div>
+    {% endblock %}
+	{% block js %}
+	{% endblock js %}
+  </body>
+</html>

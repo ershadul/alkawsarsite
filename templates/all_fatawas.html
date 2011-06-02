@@ -1,0 +1,43 @@
+{% extends "new_layout.html" %}
+
+{% block entire_title %} {{ section.title }} | {{ locals.magazine }}{% endblock %}
+
+{% load custom_tags %}
+
+{% block page_header %}
+<div>
+    <h2 class="section-title left">{{ section.title }}</h2>
+    <div class="right" style="color: #767676; margin-top: 10px;">
+        {% ifequal language 'english' %}
+            <span>Showing {{ page.start_index }}-{{ page.end_index }} of {{ page.paginator.count }} </span>
+        {% else %}
+            <span>{{ page.start_index|bengalinumber }}-{{ page.end_index|bengalinumber }}&nbsp;টি&nbsp;{{ page.paginator.count|bengalinumber }}&nbsp;টি প্রশ্ন হতে</span>
+        {% endifequal %}
+    </div>
+    <div class="clear"></div>
+</div>
+{% endblock %}
+
+{% block page_content %}
+		 <ul id="questions-answers">
+    		{% for fatawa in fatawas %}
+ 				{% include "fatawa_partial.html" %}
+    		{% endfor %}
+   		 </ul>
+		<br />
+	  {% include "pagination.html" %}
+		
+{% endblock %}
+
+{% block page_context %}
+	<div id="all-sections">
+        <h2>{{ locals.all_sections }}</h2>
+		<ul class="bullet">
+		     {% for section in sections %}
+			 	<li class="{{ language }}">
+			 	       <a href="{{ section.get_absolute_url }}">{{ section.title }}</a>
+                </li>
+             {% endfor %}
+		</ul>
+    </div>
+{% endblock %}
