@@ -20,9 +20,9 @@ if DEBUG:
     DATABASE_USER = 'root'         
     DATABASE_PASSWORD = ''
 else:
-    DATABASE_NAME = 'ershadul_kawsar'            
-    DATABASE_USER = 'ershadul_kawsar'
-    DATABASE_PASSWORD = 'ed203b20' 
+    DATABASE_NAME = 'xxxx'
+    DATABASE_USER = 'xxxx'
+    DATABASE_PASSWORD = 'xxxx' 
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
@@ -132,3 +132,8 @@ FATAWA_PAGESIZE = 5
 
 FEEDBACK_EMAIL = 'feedback@alkawsar.com'
 QUESTION_EMAIL = 'fataawa@alkawsar.com'
+
+try:
+    from local_settings import *
+except:
+    pass
