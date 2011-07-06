@@ -30,6 +30,7 @@
                             <a class="top-link {{ language }}" href="/ask_question">{{ locals.ask_question }}</a>
                      </div>
                      <div class="clear"></div>
+                     {% comment %}
                      {% ifequal language 'english' %}
                       <div id="languages" class="right">
                           <a class="top-link {{ language }}" href="http://mysite.com:8000/">» বাংলা সংস্করণ</a><span class="sep">|</span>
@@ -44,6 +45,7 @@
                       	</div>
 					 {% endifequal %}
                       <div class="clear"></div>
+                      {% endcomment %}
                   </div>
                   <div class="clear"></div>
               </div>
@@ -234,7 +236,7 @@
           </div>
           <div id="footer">
               <div class="padding">
-                  {% ifequal language 'bengali' %}<p>কপিরাইট (c) ২০১০ মাসিক আলকাউসার । ডিজাইন এবং ডেভেলপ
+                  {% ifequal language 'bengali' %}<p>কপিরাইট (c) ২০১১ মাসিক আলকাউসার । ডিজাইন এবং ডেভেলপ
                   {% else %}
                     Copyright (c) 2010 The Monthly ALKAWSAR | Powered by
                   {% endifequal %}

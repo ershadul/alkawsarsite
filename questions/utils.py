@@ -18,8 +18,15 @@ def email_questions():
             print e
 
 
-def export_questions():
-    questions = Question.objects.filter(is_answered=False).all()
+def export_questions(is_answered=False, from_id=None, to_id=None):
+    query_set = Question.objects.filter(is_answered=False)
+    if from_id:
+        query_set = query_set.filter(pk__gte=from_id)
+    if to_id:
+        query_set = query_set.filter(pk__lte=to_id)
+
+    #questions = Question.objects.filter(is_answered=False).all()
+    questions = query_set.all()
     string = u''
     for q in questions:
         string += 'ID: %s, Name: %s, Email: %s, Submitted at: %s\nQuestion: %s\n\n' % (q.id, q.name, q.email, str(q.created_at), q.question)
