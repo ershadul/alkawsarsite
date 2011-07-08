@@ -13,7 +13,6 @@ from alkawsarsite.issues.models import Issue
 from alkawsarsite.sections.models import Section
 from alkawsarsite.languages import default_language
 from alkawsarsite.languages import is_valid_language
-from alkawsarsite.tags.models import Tag
 from alkawsarsite.fatawas.models import Fatawa
 from alkawsarsite.studentadvices.models import StudentAdvice
 from alkawsarsite.questions.forms import QuestionForm
@@ -40,8 +39,6 @@ def index(request):
              'issue' : request.current_issue,
              'back_issues': request.back_issues, 
              'other_articles': other_articles,
-             'weblinks': request.weblinks,
-             'tags': request.tags,
              'locals': request.locals,
              'user': request.user,
              'sections': sections,
@@ -76,8 +73,6 @@ def issue_fatawas(request, year, month):
              'issue' : issue,
              'current_issue': request.current_issue,
              'back_issues': request.back_issues, 
-             'weblinks': request.weblinks,
-             'tags': request.tags,
              'locals': request.locals,
              'user': request.user,
              'fatawas': fatawas,
@@ -107,9 +102,7 @@ def all_fatawas(request):
     return render_to_response('all_fatawas.html', 
             {
              'language': request.language, 
-             'weblinks': request.weblinks,
              'section': section,
-             'tags': request.tags,
              'locals': request.locals,
              'user': request.user,
              'fatawas': fatawas,
@@ -148,8 +141,6 @@ def issue_advices(request, year, month):
              'issue' : issue,
              'current_issue': request.current_issue,
              'back_issues': request.back_issues, 
-             'weblinks': request.weblinks,
-             'tags': request.tags,
              'locals': request.locals,
              'user': request.user,
              'advices': advices,
@@ -177,9 +168,7 @@ def all_advices(request):
     return render_to_response('all_advices.html', 
             {
              'language': request.language, 
-             'weblinks': request.weblinks,
              'section': section,
-             'tags': request.tags,
              'locals': request.locals,
              'user': request.user,
              'advices': advices,
@@ -212,8 +201,6 @@ def show_issue(request, year, month):
              'issue' : issue,
              'current_issue': request.current_issue,
              'back_issues': request.back_issues, 
-             'weblinks': request.weblinks,
-             'tags': request.tags,
              'locals': request.locals,
              'user': request.user,
              'other_articles': other_articles,
@@ -227,8 +214,6 @@ def back_issues(request):
     return render_to_response('back_issues.html',
             {'language': request.language, 
              'back_issues': issues,
-             'weblinks': request.weblinks,
-             'tags': request.tags,
              'locals': request.locals,
              'user': request.user
              }
@@ -255,9 +240,7 @@ def show_authors(request):
          'locals': request.locals,
          'user': request.user,
          'current_issue' : request.current_issue,
-         'back_issues': request.back_issues,
-         'weblinks': request.weblinks,
-         'tags': request.tags
+         'back_issues': request.back_issues
          })
 
 def show_author(request, slug_name):
@@ -279,8 +262,6 @@ def show_author(request, slug_name):
          'user': request.user,
          'current_issue' : request.current_issue,
          'back_issues': request.back_issues,
-         'weblinks': request.weblinks,
-         'tags': request.tags,
          'other_authors': other_authors,
          'related_articles': related_articles
         }
@@ -293,9 +274,7 @@ def contact(request):
          'locals': request.locals,
          'user': request.user,
          'current_issue' : request.current_issue,
-         'back_issues': request.back_issues,
-         'weblinks': request.weblinks,
-         'tags': request.tags
+         'back_issues': request.back_issues
         }
     )
 
@@ -306,9 +285,7 @@ def about_us(request):
          'locals': request.locals,
          'user': request.user,
          'current_issue' : request.current_issue,
-         'back_issues': request.back_issues,
-         'weblinks': request.weblinks,
-         'tags': request.tags
+         'back_issues': request.back_issues
         }
     )
 
@@ -325,8 +302,6 @@ def all_sections(request):
     return render_to_response('sections.html',
             {'language': request.language, 
              'sections': sections,
-             'weblinks': request.weblinks,
-             'tags': request.tags,
              'locals': request.locals,
              'user': request.user
              }
@@ -352,7 +327,6 @@ def issue_section(request, year, month, slug_title):
              'section': section,
              'other_sections': other_sections,
              'locals': request.locals,
-             'weblinks': request.weblinks,
              'user': request.user
             }
     )    
@@ -391,7 +365,6 @@ def show_section(request, slug_title):
              'section': section,
              'page': page,
              'locals': request.locals,
-             'weblinks': request.weblinks,
              'user': request.user
             }
     )    
@@ -417,8 +390,6 @@ def show_article(request, guid):
         'article': article,
         'issue': article.issue,
         'language': request.language,
-        'weblinks': request.weblinks,
-        'tags': request.tags,
         'locals': request.locals,
         'user': request.user,
         'current_issue' : request.current_issue,
@@ -447,8 +418,6 @@ def article(request, article_id):
         'article': article,
         'issue': article.issue,
         'language': request.language,
-        'weblinks': request.weblinks,
-        'tags': request.tags,
         'locals': request.locals,
         'user': request.user,
         'current_issue' : request.current_issue,
@@ -485,40 +454,6 @@ def article_print(request, article_id):
         'user': request.user
     })
 
-def show_tag(request, slug_name):
-    
-    try:
-        tag = Tag.objects.filter(slug_name=slug_name, language=request.language)[0:1].get()
-        article_list = tag.article_set.all()
-        try:
-            page_number = int(request.GET.get('page', '1'))
-        except:
-            page_number = 1
-        paginator = Paginator(article_list, settings.PAGESIZE)
-        try:
-            page = paginator.page(page_number)
-            articles = page.object_list
-        except:
-            page = paginator.page(paginator.num_pages)
-            articles = page.object_list
-    except:
-        return HttpResponseNotFound('<h1>Tag no found</h1>')
-    
-    return render_to_response('tag_page.html', 
-        {
-            'tag': tag,
-            'page': page,
-            'articles': articles,
-            'language': request.language, 
-            'current_issue': request.current_issue,
-            'back_issues': request.back_issues, 
-            'weblinks': request.weblinks,
-            'tags': request.tags,
-            'locals': request.locals,
-            'user': request.user
-        }
-    )
-
 def help_font(request):
     return render_to_response('help_font.html',
         {
@@ -526,8 +461,6 @@ def help_font(request):
             'issue': request.current_issue,
             'current_issue': request.current_issue,
             'back_issues': request.back_issues, 
-            'weblinks': request.weblinks,
-            'tags': request.tags,
             'locals': request.locals,
             'user': request.user
         }
@@ -585,8 +518,6 @@ def show500(request):
 def subscribe_agent(request):
     return render_to_response('subscriber_agent.html', {
         'language': request.language,
-        'weblinks': request.weblinks,
-        'tags': request.tags,
         'locals': request.locals,
         'user': request.user,
         'current_issue' : request.current_issue,

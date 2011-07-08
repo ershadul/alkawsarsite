@@ -3,7 +3,6 @@
 
 from django.db import models
 from alkawsarsite.issues.models import Issue
-from alkawsarsite.tags.models import Tag
 
 from alkawsarsite.languages import *
 
@@ -17,7 +16,6 @@ class Fatawa(models.Model):
     answer = models.TextField()
     references = models.CharField(max_length=2024, default='', blank=True)
     created_at = models.DateTimeField(auto_now=True)
-    tag = models.ForeignKey(Tag, null=True, blank=True)
     is_published = models.BooleanField(default=True)
     
     class Meta:

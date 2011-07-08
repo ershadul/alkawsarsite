@@ -7,7 +7,6 @@ from django.utils.hashcompat import sha_constructor
 
 
 from alkawsarsite.languages import *
-from alkawsarsite.tags.models import Tag
 from alkawsarsite.issues.models import Issue
 
 

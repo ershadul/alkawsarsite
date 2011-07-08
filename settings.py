@@ -5,27 +5,6 @@ def path(*x):
     """Get and return the relative path of x."""
     return os.path.join(os.path.abspath(os.path.dirname(__file__)), *x)
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    ('Ershadul Hoque Sarker', 'ershadulhoque@gmail.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASE_ENGINE = 'mysql'
-if DEBUG:
-    DATABASE_NAME = 'alkawsarsite'  
-    DATABASE_USER = 'root'         
-    DATABASE_PASSWORD = ''
-else:
-    DATABASE_NAME = 'xxxx'
-    DATABASE_USER = 'xxxx'
-    DATABASE_PASSWORD = 'xxxx' 
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -76,8 +55,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'alkawsarsite.middleware.LanguageMiddleware',
     'alkawsarsite.middleware.IssueMiddleware',
-    'alkawsarsite.middleware.WeblinkMiddleware',
-    'alkawsarsite.middleware.TagMiddleware',
     'alkawsarsite.middleware.ServerErrorMiddleware',
 )
 
@@ -106,7 +83,7 @@ INSTALLED_APPS = (
     'alkawsarsite.issues',
     'alkawsarsite.articles',
     'alkawsarsite.weblinks',
-    'alkawsarsite.tags',
+    #'alkawsarsite.tags',
     'alkawsarsite.tags_filters',
     'alkawsarsite.feedbacks',
     'alkawsarsite.members',

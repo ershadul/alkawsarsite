@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 
 from alkawsarsite.members.forms import UserCreationForm, LoginForm, PasswordRetrievalForm
 from alkawsarsite.members.models import UserProfile
-from alkawsarsite.tags.models import Tag
 
 def register(request):
     """

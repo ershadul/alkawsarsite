@@ -10,8 +10,6 @@ from alkawsarsite.languages import *
 from alkawsarsite.sections.models import Section
 from alkawsarsite.issues.models import Issue
 from alkawsarsite import localization
-from alkawsarsite.weblinks.models import WebLink
-from alkawsarsite.tags.models import Tag
 
 class DomainMiddleware:
     """ Set subdomain attribute to request object. """
@@ -70,17 +68,6 @@ class IssueMiddleware(object):
         request.current_issue = current_issue
         request.back_issues = back_issues
         return None
-
-class WeblinkMiddleware(object):
-    def process_request(self, request):
-        request.weblinks = WebLink.objects.filter(is_published=True, language=request.language).all()[0:10]
-        
-class TagMiddleware(object):
-    def process_request(self, request):
-        request.tags = Tag.objects.filter(is_published=True, language=request.language).all()
-
-
-
 
 class ServerErrorMiddleware(object):
     """ This middleware will catch exceptions and creates a ticket in an existing

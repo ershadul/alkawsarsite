@@ -2,19 +2,29 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Ershadul Hoque Sarker', 'ershadulhoque@gmail.com'),
+    ('Ershadul Hoque', 'ershadulhoque@gmail.com'),
 )
 
 MANAGERS = ADMINS
-
-DATABASE_ENGINE = 'mysql'
 if DEBUG:
-    DATABASE_NAME = 'alkawsarsite'
-    DATABASE_USER = 'root'
-    DATABASE_PASSWORD = ''
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'alkawsarsite',                      # Or path to database file if using sqlite3.
+            'USER': 'root',                      # Not used with sqlite3.
+            'PASSWORD': '',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }
 else:
-    DATABASE_NAME = 'ershadul_kawsar'
-    DATABASE_USER = 'ershadul_kawsar'
-    DATABASE_PASSWORD = 'ed203b20'
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
-DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+            'NAME': 'ershadul_kawsar',                      # Or path to database file if using sqlite3.
+            'USER': 'ershadul_kawsar',                      # Not used with sqlite3.
+            'PASSWORD': 'ed203b20',                  # Not used with sqlite3.
+            'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+            'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        }
+    }

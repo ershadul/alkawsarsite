@@ -13,8 +13,6 @@ def index(request):
        {
             'articles': articles,
             'language': request.language,
-            'weblinks': request.weblinks,
-            'tags': request.tags,
             'locals': request.locals,
             'user': request.user
        }

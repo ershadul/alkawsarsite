@@ -7,7 +7,6 @@ from alkawsarsite.languages import *
 from alkawsarsite.authors.models import Author
 from alkawsarsite.sections.models import Section
 from alkawsarsite.issues.models import Issue
-from alkawsarsite.tags.models import Tag
 from alkawsarsite import util
 
 
@@ -43,10 +42,8 @@ class Article(models.Model):
     n_clicks = models.IntegerField(default=0)
     n_comments = models.IntegerField(default=0)
     
-    tags = models.ManyToManyField(Tag, blank=True)
-    
     objects = DeferredBodyTextManager()
-    
+
     class Meta:
         ordering = ['language', 'issue']
         
@@ -86,29 +83,7 @@ class Article(models.Model):
     def get_issue_section_url(self):
         if self.section:
             return '/issue/' + str(self.issue.year) + '/' + str(self.issue.month) + self.section.get_absolute_url()
-    
-    def save(self, force_insert=False, force_update=False):
-        super(Article, self).save(force_insert=force_insert, force_update=force_update)
-        '''
-        tags = Tag.objects.filter(language=self.language).all()        
-        tag_count_list = []
-        for tag in tags:
-            tag.total_ref = tag.article_set.count()
-            tag_count_list.append(tag.total_ref)
-            #tag.save()
-        tag_count_list.sort()
-        tag_max = tag_count_list[-1]
-        tag_min = tag_count_list[0]
-        max_size = 25
-        min_size = 11
-        for tag in tags:
-            if tag.total_ref > tag_min:
-                tag.font_size = (max_size * (tag.total_ref - tag_min)) / (tag_max - tag_min)
-            else:
-                tag.font_size = min_size
-            tag.save()
-        '''
-            
+
     def __unicode__(self):
         return self.headline
 	

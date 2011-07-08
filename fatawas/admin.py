@@ -1,5 +1,6 @@
 from django.contrib import admin
 from alkawsarsite.fatawas.models import Fatawa
+from alkawsarsite.issues.models import Issue
 
 def make_published(modeladmin, request, queryset):
     queryset.update(is_published=True)
@@ -16,6 +17,11 @@ class FatawaAdmin(admin.ModelAdmin):
     actions = [make_published, make_unpublished]
     list_display = ('id', 'serial', 'language', 'issue', 'questioner', 'address', 'is_published', )
     list_editable = ('serial',)
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "issue":
+            kwargs["queryset"] = Issue.objects.filter(language=request.language)
+        return super(FatawaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     class Media:
         js = ('/static/js/jquery-1.4.2.min.js',
