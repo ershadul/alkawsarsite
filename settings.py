@@ -83,7 +83,7 @@ INSTALLED_APPS = (
     'alkawsarsite.issues',
     'alkawsarsite.articles',
     'alkawsarsite.weblinks',
-    #'alkawsarsite.tags',
+    'alkawsarsite.topics',
     'alkawsarsite.tags_filters',
     'alkawsarsite.feedbacks',
     'alkawsarsite.members',

@@ -879,3 +879,16 @@ ul#english-articles li p {
 ul#english-articles li p.byline {
     font-size: 16px;
 }
+
+/* topics */
+
+#article-topics {
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+#article-topics span {
+    padding: 0 10px;
+    color: #777;
+}

@@ -1,0 +1,52 @@
+{% extends "new_layout.html" %}
+
+{% block entire_title %} {{ topic.name }} | {{ locals.magazine_name }}{% endblock %}
+ 
+{% block page_header %}
+	<h2>{{ topic.name }}</h2>
+{% endblock %}
+
+{% block page_content %}
+    {% if topic.description %}
+	<p>{% ifequal language 'bengali' %}পরিচিতি:{% else %}Introduction:{% endifequal %}</p>
+    <div class="intro-text {{ language }}"> {{ topic.description }}</div>
+	<br />
+    {% endif %}
+    
+    {% if related_articles %}
+	<div id="related-articles" >
+		{% comment %}<h2>{{ locals.related_articles }}</h2>{% endcomment %}
+		<ul class="articles">
+    		{% for article in related_articles %}
+    			<li>
+    				<p class="article-section {{ language }}">
+					       {{ article.issue.title }} {% if article.section %} . {{ article.section.title }} {% endif %}
+				    </p>
+       				<h4><a href="{{ article.get_absolute_url }}">{{ article.headline }}</a></h4>
+					<div class="intro-text">{{ article.intro_text|truncatewords:50 }}</div>
+                    <div>
+                        <a class="read-more right" href="{{ article.get_absolute_url }}">{{ locals.read_more }} »</a>
+                       <div class="clear"></div>
+                    </div>
+        		</li>
+    		{% endfor %}
+		</ul>
+	</div>
+    {% include "pagination.html" %}
+	{% endif %}
+    
+ {% endblock %}
+
+{% block page_context %}
+	<div id="other-authors">
+		<h2>অন্যান্য বিষয়সমূহ:</h2>
+		<ul class="articles">
+			{% for topic in other_topics %}
+    			<li>
+    				<span class="right-arrow">»</span>
+       				<a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a>
+        		</li>
+    		{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

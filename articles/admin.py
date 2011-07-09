@@ -3,6 +3,7 @@ from alkawsarsite.articles.models import Article
 from alkawsarsite.issues.models import Issue
 from alkawsarsite.authors.models import Author
 from alkawsarsite.sections.models import Section
+from alkawsarsite.topics.models import Topic
 
 def make_published(modeladmin, request, queryset):
     queryset.update(is_published=True)
@@ -40,6 +41,8 @@ class ArticleAdmin(admin.ModelAdmin):
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "authors":
             kwargs["queryset"] = Author.objects.filter(language=request.language)
+        elif db_field.name == "topics":
+            kwargs["queryset"] = Topic.objects.filter(language=request.language)
         return super(ArticleAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
     fieldsets = (
@@ -53,7 +56,7 @@ class ArticleAdmin(admin.ModelAdmin):
             'fields': ('author_name', 'authors',)
         }),
         ('Advanced Options', {
-            'fields': ('is_published', 'order', 'is_featured',)
+            'fields': ('is_published', 'order', 'is_featured', 'topics',)
         }),
     )
 

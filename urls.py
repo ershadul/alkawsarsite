@@ -34,6 +34,8 @@ urlpatterns = patterns('',
     
     (r'^authors$', 'alkawsarsite.views.show_authors'),
     (r'^author/(?P<slug_name>[\w\-]+)$', 'alkawsarsite.views.show_author'),
+
+    (r'^topic/(?P<topic_id>\d+)', 'alkawsarsite.views.show_topic'),
     
     (r'^article/(?P<article_id>\d+)$', 'alkawsarsite.views.article'),
     (r'^article/(?P<article_id>\w+)/print$', 'alkawsarsite.views.article_print'),

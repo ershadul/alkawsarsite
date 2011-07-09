@@ -17,6 +17,7 @@ from alkawsarsite.fatawas.models import Fatawa
 from alkawsarsite.studentadvices.models import StudentAdvice
 from alkawsarsite.questions.forms import QuestionForm
 from alkawsarsite.questions.models import Question
+from alkawsarsite.topics.models import Topic
 from alkawsarsite.utils.paginator import DiggPaginator as Paginator
 
 def index(request):
@@ -244,25 +245,70 @@ def show_authors(request):
          })
 
 def show_author(request, slug_name):
-    
     try:
         author = Author.objects.filter(slug_name=slug_name, language=request.language).all()[0:1].get()
-        related_articles = author.article_set.all()
     except Exception, e:
-        print e
-        return HttpResponseNotFound('<h1>Author not found</h1>')
+        raise Http404
+    article_list = author.article_set.all()
+    try:
+        page_number = int(request.GET.get('page', '1'))
+    except:
+        page_number = 1
+    paginator = Paginator(article_list, 10)
+    try:
+        page = paginator.page(page_number)
+        related_articles = page.object_list
+    except:
+        page = paginator.page(paginator.num_pages)
+        related_articles = page.object_list
     
     other_authors = Author.objects.filter(language=request.language).exclude(id=author.id).all()
     
     return render_to_response('author_page.html', 
         {
          'author': author,
+         'page': page,
          'language': request.language,
          'locals': request.locals,
          'user': request.user,
          'current_issue' : request.current_issue,
          'back_issues': request.back_issues,
          'other_authors': other_authors,
+         'related_articles': related_articles
+        }
+    )
+
+def show_topic(request, topic_id):
+    try:
+        topic = Topic.objects.get(pk=topic_id)
+    except Exception, e:
+        raise Http404
+    article_list = topic.article_set.filter(is_published=True).all()
+    try:
+        page_number = int(request.GET.get('page', '1'))
+    except:
+        page_number = 1
+    paginator = Paginator(article_list, 10)
+    try:
+        page = paginator.page(page_number)
+        related_articles = page.object_list
+    except:
+        page = paginator.page(paginator.num_pages)
+        related_articles = page.object_list
+    
+    #related_articles = topic.article_set.filter(is_published=True).all()
+    other_topics = Topic.objects.filter(language=request.language).exclude(id=topic.id).order_by('name').all()
+
+    return render_to_response('topic_page.html',
+        {
+         'topic': topic,
+         'page': page,
+         'language': request.language,
+         'locals': request.locals,
+         'user': request.user,
+         'current_issue' : request.current_issue,
+         'back_issues': request.back_issues,
+         'other_topics': other_topics,
          'related_articles': related_articles
         }
     )
@@ -336,7 +382,7 @@ def show_section(request, slug_title):
     try:
         section = Section.objects.filter(slug_title=slug_title, language=request.language)[0:1].get()
     except Exception, e:
-        print e
+        #print e
         return HttpResponseNotFound('<h1>Page not fount</h1>')
     
     article_list = section.article_set.all()

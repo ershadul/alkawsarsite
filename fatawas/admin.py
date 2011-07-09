@@ -1,6 +1,7 @@
 from django.contrib import admin
 from alkawsarsite.fatawas.models import Fatawa
 from alkawsarsite.issues.models import Issue
+from alkawsarsite.topics.models import Topic
 
 def make_published(modeladmin, request, queryset):
     queryset.update(is_published=True)
@@ -22,6 +23,11 @@ class FatawaAdmin(admin.ModelAdmin):
         if db_field.name == "issue":
             kwargs["queryset"] = Issue.objects.filter(language=request.language)
         return super(FatawaAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "topics":
+            kwargs["queryset"] = Topic.objects.filter(language=request.language)
+        return super(FatawaAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
 
     class Media:
         js = ('/static/js/jquery-1.4.2.min.js',

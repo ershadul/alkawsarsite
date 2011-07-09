@@ -11,4 +11,5 @@ def email_feedbacks():
             send_mail(feedback.name, feedback.feedback, feedback.email,
                       [settings.FEEDBACK_EMAIL])
         except Exception, e:
-            print e
+            #print e
+            pass

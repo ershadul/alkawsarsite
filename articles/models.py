@@ -8,6 +8,7 @@ from alkawsarsite.authors.models import Author
 from alkawsarsite.sections.models import Section
 from alkawsarsite.issues.models import Issue
 from alkawsarsite import util
+from alkawsarsite.topics.models import Topic
 
 
 class DeferredBodyTextManager(models.Manager):
@@ -18,6 +19,7 @@ class Article(models.Model):
     language = models.CharField(max_length=15, choices=languages, default=default_language)
     issue = models.ForeignKey(Issue)
     section = models.ForeignKey(Section, null=True, blank=True)
+    topics = models.ManyToManyField(Topic, null=True, blank=True)
     
     authors = models.ManyToManyField(Author, blank=True, related_name='article_set')
     author_name = models.CharField(max_length=256, blank=True, default='')

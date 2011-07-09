@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 def email_questions():
     questions = Question.objects.filter(is_answered=False).order_by('id').all()
     for question in questions:
-        print question.id, question.get_email()
+        #print question.id, question.get_email()
         try:
             send_mail(question.get_questioner(),
                       question.question,
@@ -15,7 +15,8 @@ def email_questions():
                       [settings.QUESTION_EMAIL]
             )
         except Exception, e:
-            print e
+            #print e
+            pass
 
 
 def export_questions(is_answered=False, from_id=None, to_id=None):

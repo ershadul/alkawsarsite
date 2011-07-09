@@ -1,10 +1,9 @@
-
 # fatawa models
-
 from django.db import models
 from alkawsarsite.issues.models import Issue
 
 from alkawsarsite.languages import *
+from alkawsarsite.topics.models import Topic
 
 class Fatawa(models.Model):
     language = models.CharField(max_length=15, choices=languages, default=default_language)
@@ -17,6 +16,8 @@ class Fatawa(models.Model):
     references = models.CharField(max_length=2024, default='', blank=True)
     created_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
+
+    topics = models.ManyToManyField(Topic, null=True, blank=True)
     
     class Meta:
         ordering = ['language', '-serial']
