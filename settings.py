@@ -112,5 +112,5 @@ QUESTION_EMAIL = 'fataawa@alkawsar.com'
 
 try:
     from local_settings import *
-except:
-    pass
+except Exception, e:
+    raise e
