@@ -55,7 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'alkawsarsite.middleware.LanguageMiddleware',
     'alkawsarsite.middleware.IssueMiddleware',
-    'alkawsarsite.middleware.ServerErrorMiddleware',
+    'server_errors.middleware.ServerErrorMiddleware',
 )
 
 ROOT_URLCONF = 'alkawsarsite.urls'
@@ -91,7 +91,7 @@ INSTALLED_APPS = (
     'alkawsarsite.contentcategories',
     'alkawsarsite.studentadvices',
     'alkawsarsite.questions',
-    #'django.contrib.flatpages',
+    'server_errors',
 )
 
 # Emails
