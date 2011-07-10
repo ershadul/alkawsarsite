@@ -1,5 +1,7 @@
 # Django settings for alkawsarsite project.
-import os
+import os, sys
+
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 
 def path(*x):
     """Get and return the relative path of x."""
@@ -41,8 +43,8 @@ SECRET_KEY = '6mb49k1w%m&)tun3@u$(0(!ud0)ms*0e%g0dwdvt5f(tv0g83q'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.load_template_source',
 )
 
@@ -69,7 +71,7 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS  = (
     #'django.core.context_processors.csrf',
-    "django.core.context_processors.auth",
+    #"django.core.context_processors.auth",
 )
 
 INSTALLED_APPS = (
