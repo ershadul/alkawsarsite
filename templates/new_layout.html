@@ -162,11 +162,13 @@
               </div>
               <div id="page-context">
                   <div class="padding">
+                        {% comment %}
                       <div id="rss-link">
                            <a class="left" href="http://feeds.feedburner.com/alkawsar" title="Read the latest articles">RSS 2.0</a>
                            <img class="left" alt="RSS" src="/static/img/icon-rss.gif" />
                            <div class="clear"></div>
                       </div>
+                      {% endcomment %}
 
                       {% ifequal language "bengali" %}
                          <div id="bangla-help">
@@ -192,41 +194,6 @@
 	                        </ul>
                         {% endif %}
                         
-                        {% comment %}
-                     	<div id="back-issues">
-                     		<h2>{{ locals.back_issue }}</h2>
-							<ul class="headlines">
-                     			{% for issue in back_issues %}
-                     			<li>
-                     				<a href="/issue/{{ issue.year }}/{{ issue.month }}/{{ issue.slug_title }}">{{ issue.title }}</a>
-                     			</li>
-								{% endfor %}
-                     		</ul>
-                     	</div>
-                     	{% endcomment %}
-                        
-                        {% comment %}
-                        {% if tags %}
-                         <div id="tags-cloud">
-                          <h2>{{ locals.tags_cloud }}</h2>
-						  {% for tag in tags %}
-						  	<a style="font-size: {{ tag.font_size }}pt;" href="/tag/{{ tag.slug_name }}">{{ tag.name }}</a>
-                          {% endfor %}
-                         </div>
-                        {% endif %}
-                        {% endcomment %}
-                      
-                      {% if weblinks %}
-					  <div id="web-links">
-							<h2>{{ locals.weblinks|upper }}</h2>
-							<ul class="headlines">
-							{% for link in weblinks %}
-								<li><span class="right-arrow">»</span><a target="_blank" href="{{ link.url }}">{{ link.title }}</a></li>
-							{% endfor %}
-							</ul>
-					  </div>
-                      {% endif %}
-					 
                      {% endblock %}
 					  
                   </div>
