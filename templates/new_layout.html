@@ -181,7 +181,9 @@
                       {% if issue and issue.image %}
                           <div id="issue-cover" style="margin-bottom: 10px;">
                               <h2>এ সংখ্যার প্রচ্ছদ</h2>
+                              {% if issue.image %}
                               <img id="cover-img" src="/static/img/cover-pages/{{ issue.image }}" /> 
+                              {% endif %}
                            </div>
                       {% endif %}
                       {% block page_context %}
