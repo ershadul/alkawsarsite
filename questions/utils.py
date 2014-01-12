@@ -2,21 +2,21 @@ import datetime
 from alkawsarsite.questions.models import Question
 
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import send_mail, send_mass_mail
 
 def email_questions():
-    questions = Question.objects.filter(is_answered=False).order_by('id').all()
+    questions = Question.objects.order_by('created_at').all()[522:]
     for question in questions:
-        #print question.id, question.get_email()
+        print question.id, question.get_email()
         try:
-            send_mail(question.get_questioner(),
-                      question.question,
-                      question.get_email(),
-                      [settings.QUESTION_EMAIL]
+            datatuple = (question.get_questioner(),
+                question.question,
+                question.get_email(),
+                settings.QUESTION_EMAIL
             )
+            print send_mass_mail((datatuple,))
         except Exception, e:
-            #print e
-            pass
+            print e
 
 
 def export_questions(is_answered=False, from_id=None, to_id=None):

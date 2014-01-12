@@ -96,15 +96,6 @@ INSTALLED_APPS = (
     'server_errors',
 )
 
-# Emails
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'mail@alkawsar.com'
-EMAIL_HOST_PASSWORD = 'mail90mail'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-SERVER_EMAIL = EMAIL_HOST_USER
-DEFAULT_FROM_EMAIL = 'Alkawsar <noReply@alkawsar.com>'
-
 # alkawsar settings
 PAGESIZE = 10
 FATAWA_PAGESIZE = 5
