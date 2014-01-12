@@ -22,40 +22,42 @@ class Issue(models.Model):
                ('12', 'December')
               )
     some_years = (
-             ('2013', '2013'),
-             ('2012', '2012'),
-             ('2011', '2011'),
-             ('2010', '2010'),
-             ('2009', '2009'),
-             ('2008', '2008'),
-             ('2007', '2007'),
-             ('2006', '2006'),
-             ('2005', '2005'),
-             ('2004', '2004'),
-            )
+        ('2015', '2015'),
+        ('2014', '2014'),
+        ('2013', '2013'),
+        ('2012', '2012'),
+        ('2011', '2011'),
+        ('2010', '2010'),
+        ('2009', '2009'),
+        ('2008', '2008'),
+        ('2007', '2007'),
+        ('2006', '2006'),
+        ('2005', '2005'),
+        ('2004', '2004'),
+    )
     language = models.CharField(max_length=15, choices=languages, default=default_language)
     title = models.CharField(max_length=128)
     title_alias = models.CharField(max_length=128, null=True, blank=True)
     slug_title = models.SlugField(max_length=128)
-    
+
     year = models.CharField(max_length=5, choices=some_years)
     month = models.CharField(max_length=2, choices=twelve_months)
     issue_year = models.CharField(max_length=10, blank=True, default='0')
     issue_number = models.CharField(max_length=10, blank=True, default='0')
-    
+
     is_default = models.BooleanField(default=False)
     is_published = models.BooleanField(default=False)
     url = models.CharField(max_length=256, blank=True, default='')
     guid = models.CharField(max_length=40, blank=True, unique=True, db_index=True, default=util.get_uuid)
-    
+
     image = models.CharField(max_length=50, blank=True, null=True)
-    
+
     sections = models.ManyToManyField(Section, blank=True)
-    
-    
+
+
     class Meta:
         ordering = ['language', '-year' ,'-month']
-        
+
     def save(self, force_insert=False, force_update=False):
         if Issue.objects.filter(slug_title=self.slug_title, language=self.language).exclude(pk=self.id).count() != 0:
                 raise Exception('Duplicate slug title !!!')
@@ -68,7 +70,7 @@ class Issue(models.Model):
 
     def get_absolute_url(self):
         return '/issue/' + self.year + '/' + self.month +'/' + self.slug_title
-    
+
     def __unicode__(self):
             return self.title
 
