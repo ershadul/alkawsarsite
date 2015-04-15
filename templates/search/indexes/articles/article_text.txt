@@ -1,0 +1,4 @@
+{{ object.headline }}
+{{ object.author_description }}
+{{ object.author_name }}
+{{ object.body_text }}
