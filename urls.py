@@ -13,13 +13,13 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    #(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', { 'document_root' : settings.MEDIA_ROOT }),
     
     #(r'^admin/', include(admin.site.urls)),
-
+    (r'^search', include('haystack.urls')),
     (r'^feeds/', include('alkawsarsite.feeds.urls')),
     (r'^issues/archives', 'alkawsarsite.views.back_issues'),
     (r'^issue/(?P<year>\d+)/(?P<month>\d+)/section/question-answer', 'alkawsarsite.views.issue_fatawas'),

@@ -46,6 +46,12 @@
 					 {% endifequal %}
                       <div class="clear"></div>
                       {% endcomment %}
+                      {% comment %}
+                      <form action="/search">
+                          <input type="text" name="q" value="" id="search" value="{{ query }}" style="padding: 3px; width: 200px;">
+                          <input type="submit" value="খোঁজ করুন" style="font-size: 20px;margin-bottom:10px">
+                      </form>
+                      {% endcomment %}
                   </div>
                   <div class="clear"></div>
               </div>
@@ -177,7 +183,14 @@
                             </a>
                          </div>
                       {% endifequal %}
-
+                      
+                      {% comment %}
+                      {% include "snippets/ramadan_articles.html" %}
+                      {% endcomment %}
+                      {% comment %}
+                      {% include "snippets/hajj_articles.html" %}
+                      {% endcomment %}
+                      
                       {% if issue and issue.image %}
                           <div id="issue-cover" style="margin-bottom: 10px;">
                               <h2>এ সংখ্যার প্রচ্ছদ</h2>
