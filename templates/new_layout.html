@@ -185,10 +185,9 @@
                          </div>
                       {% endifequal %}
                       
-                      {% comment %}
+                      
                       {% include "snippets/ramadan_articles.html" %}
                       {% include "snippets/hajj_articles.html" %}
-                      {% endcomment %}
                       
                       
                       {% if issue and issue.image %}
@@ -199,6 +198,7 @@
                               {% endif %}
                            </div>
                       {% endif %}
+                      {% comment %}
                       {% block page_context %}
                         {% if popular_articles %}
                             <h2>{{ locals.popular_articles }}</h2>
@@ -208,8 +208,8 @@
     	                        {% endfor %}
 	                        </ul>
                         {% endif %}
-                        
                      {% endblock %}
+                     {% endcomment %}
 					  
                   </div>
               </div>
