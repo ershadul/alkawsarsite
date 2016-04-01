@@ -148,7 +148,7 @@
                              <div style="margin: 20px 0; padding: 10px; border-top: 2px solid #ccc">
                              	<h2>{{ locals.back_issue }}</h2>
                              	<br />
-                             	{% for issue in back_issues|slice:":3" %}
+                             	{% for issue in back_issues|slice:":9" %}
             						<div class="left" style="width: 140px; height: 230px; margin: 0 20px 15px 0;border: 1px solid #ccc; padding: 10px 15px;">
                                         {% if issue.image %}
                 						<img src="/static/img/cover-pages/{{ issue.image }}" style="width: 140px;height: 200px" />{% endif %}
