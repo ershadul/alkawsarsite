@@ -55,16 +55,22 @@ class IssueMiddleware(object):
     def process_request(self, request):
         back_issues = []
         current_issue = None
-        current_issue = Issue.objects.filter(
-                                    is_published=True,
-                                    is_default=True,
-                                    language=request.language
-                                ).all()[0:1].get()
+        try:
+            current_issue = Issue.objects.filter(
+                                        is_published=True,
+                                        is_default=True,
+                                        language=request.language
+                                    ).all()[0:1].get()
+        except Exception:
+            pass
         back_issues = Issue.objects.filter(
                                         is_published=True,
                                         is_default=False, 
                                         language=request.language
                                     ).all()
+        if not current_issue:
+            current_issue = back_issues[0]
+        
         request.current_issue = current_issue
         request.back_issues = back_issues
         return None

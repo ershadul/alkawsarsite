@@ -150,7 +150,8 @@
                              	<br />
                              	{% for issue in back_issues|slice:":3" %}
             						<div class="left" style="width: 140px; height: 230px; margin: 0 20px 15px 0;border: 1px solid #ccc; padding: 10px 15px;">
-                						<img src="/static/img/cover-pages/{{ issue.image }}" style="width: 140px;height: 200px" />
+                                        {% if issue.image %}
+                						<img src="/static/img/cover-pages/{{ issue.image }}" style="width: 140px;height: 200px" />{% endif %}
                 						<p style="text-align: center;padding-top: 3px;">
                     						<a href="{{ issue.get_absolute_url }}" style="font-size:16px;">{{ issue.title|upper }}</a>
                 						</p>
@@ -186,16 +187,15 @@
                       
                       {% comment %}
                       {% include "snippets/ramadan_articles.html" %}
-                      {% endcomment %}
-                      {% comment %}
                       {% include "snippets/hajj_articles.html" %}
                       {% endcomment %}
+                      
                       
                       {% if issue and issue.image %}
                           <div id="issue-cover" style="margin-bottom: 10px;">
                               <h2>এ সংখ্যার প্রচ্ছদ</h2>
                               {% if issue.image %}
-                              <img id="cover-img" src="/static/img/cover-pages/{{ issue.image }}" /> 
+                              <img id="cover-img" src="/static/img/cover-pages/{{ issue.image }}" width="260" height="380"/> 
                               {% endif %}
                            </div>
                       {% endif %}
