@@ -13,16 +13,16 @@
                   	{% ifequal language 'english' %}
                       <span id="monthly">The Monthly</span>
                       <h2 id="mag-name">ALKAWSAR</h2>
-                      
+
                       <span id="slogan">Markazuddawa Al-Islamia Dhaka</span>
 					{% else %}
 						<span id="monthly">মাসিক</span>
                       	{% comment %}<h2 id="mag-name">আলকাউসার</h2>{% endcomment %}
                         <img src="/static/img/bengali-logo.png" />
                         <span id="slogan">গবেষণামূলক উচ্চতর শিক্ষাপ্রতিষ্ঠান মারকাযুদ্ দাওয়াহ আলইসলামিয়া ঢাকা-এর মুখপত্র</span>
-                      	
+
 					{% endifequal %}
-                      
+
                   </div>
                   <div id="top-links" class="right">
                   	 <div id="user-menu" class="right">
@@ -35,7 +35,7 @@
                       <div id="languages" class="right">
                           <a class="top-link {{ language }}" href="http://mysite.com:8000/">» বাংলা সংস্করণ</a><span class="sep">|</span>
                           <span class="lang-selected">English</span>
-                          
+
                       </div>
 					 {% else %}
                       	<div class="clear"></div>
@@ -56,7 +56,7 @@
                   <div class="clear"></div>
               </div>
           </div>
-          <div id="menu-bar" class="{{ language }}">	 
+          <div id="menu-bar" class="{{ language }}">
                <ul class="right">
                   {% for menu in locals.main_menu %}
                       {% if menu.is_active %}
@@ -69,7 +69,7 @@
                       {% endif %}
                   {% endfor %}
                </ul>
-               <div class="clear"></div>         
+               <div class="clear"></div>
 		  </div>
           <div id="wrapper">
           	{% block wrapper %}
@@ -77,7 +77,7 @@
               	<div class="padding">
                  	<div id="issue-header">
                  	    {% block page_header %}
-                 		
+
 						<div id="issue-info" style="text-align: center">
                             <h1>
                             {{ issue.title_alias }}
@@ -85,28 +85,28 @@
                             {{ issue.title }}
                             </h1>
               				<p style="">
-              				    
-								{% if issue.is_default %} 
+
+								{% if issue.is_default %}
 									{{ locals.current_issue }}
 								{% else %}
 									{{ locals.back_issue }}
 								{% endif %}
-							    
+
               				    . {{ locals.year }}: {{ issue.issue_year }}   .  {{ locals.number }}: {{ issue.issue_number }}
                             </p>
-						</div>    
-                        {% endblock %}   			
+						</div>
+                        {% endblock %}
 					</div>
 					<div id="page-content">
 						<div style="padding:10px 0;">
 						{% block page_content %}
-                            
+
                              <div style="width: 100%;">
                                  <div style="float: left; width: 50%;">
                                      <div style="padding: 0 10px 0 0;border-right: 1px dotted #ddd">
-                                     
+
                                      <h3 style="color: #666;padding: 0 0 5px  0;">নিয়মিত বিভাগসমূহ</h3>
-                                     
+
                                      {% for section in sections %}
                                         <div style="margin: 0 0 5px 0;padding-bottom: 5px; border-bottom: 1px dotted #ddd">
                                             <h4>
@@ -118,7 +118,7 @@
                                                        <a style="font-size: 1.15em" href="{{ article.get_absolute_url }}">{{ article.headline }}</a>
                                                         {{ article.get_authors_link|safe }}
                                                     </li>
-                                                    
+
                                                 {% endfor %}
                                             </ul>
                                         </div>
@@ -128,7 +128,7 @@
                                  <div style="float: left; width: 50%;">
                                      <div style="padding: 0 0 0 10px;">
                                           <h3 style="color: #666;padding: 0 0 5px  0;">এ সংখ্যায় আরো আছে</h3>
-                                         
+
                                             <ul class="headlines">
 								                {% for article in other_articles %}
 									                <li style="border-bottom: 1px dotted #ddd">
@@ -144,7 +144,7 @@
                                  </div>
                              </div>
                              <div class="clear"></div>
-                             
+
                              <div style="margin: 20px 0; padding: 10px; border-top: 2px solid #ccc">
                              	<h2>{{ locals.back_issue }}</h2>
                              	<br />
@@ -161,10 +161,10 @@
         						<a style="font-weight: bold;" href="/issues/archives">আরও দেখুন »</a>
                              </div>
 						{% endblock %}
-						
+
 						</div>
 					</div>
-					
+
 				</div>
               </div>
               <div id="page-context">
@@ -184,12 +184,7 @@
                             </a>
                          </div>
                       {% endifequal %}
-                      
-                      
-                      {% include "snippets/ramadan_articles.html" %}
-                      {% include "snippets/hajj_articles.html" %}
-                      
-                      
+
                       {% if issue and issue.image %}
                           <div id="issue-cover" style="margin-bottom: 10px;">
                               <h2>এ সংখ্যার প্রচ্ছদ</h2>
@@ -198,6 +193,10 @@
                               {% endif %}
                            </div>
                       {% endif %}
+
+                      {% include "snippets/ramadan_articles.html" %}
+                      {% include "snippets/hajj_articles.html" %}
+
                       {% comment %}
                       {% block page_context %}
                         {% if popular_articles %}
@@ -210,7 +209,7 @@
                         {% endif %}
                      {% endblock %}
                      {% endcomment %}
-					  
+
                   </div>
               </div>
               <div class="clear"></div>
