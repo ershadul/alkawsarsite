@@ -189,13 +189,13 @@
                           <div id="issue-cover" style="margin-bottom: 10px;">
                               <h2>এ সংখ্যার প্রচ্ছদ</h2>
                               {% if issue.image %}
-                              <img id="cover-img" src="/static/img/cover-pages/{{ issue.image }}" width="260" height="380"/> 
+                              <img id="cover-img" src="/static/img/cover-pages/{{ issue.image }}" width="260" height="380"/>
                               {% endif %}
                            </div>
                       {% endif %}
 
                       {% include "snippets/ramadan_articles.html" %}
-                      {% include "snippets/hajj_articles.html" %}
+                      {% comment %}{% include "snippets/hajj_articles.html" %} {% endcomment %}
 
                       {% comment %}
                       {% block page_context %}
