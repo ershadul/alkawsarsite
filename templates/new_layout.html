@@ -193,9 +193,10 @@
                               {% endif %}
                            </div>
                       {% endif %}
-
+                      {% comment %}
                       {% include "snippets/ramadan_articles.html" %}
-                      {% comment %}{% include "snippets/hajj_articles.html" %} {% endcomment %}
+                      {% endcomment %}
+                      {% include "snippets/hajj_articles.html" %}
 
                       {% comment %}
                       {% block page_context %}
